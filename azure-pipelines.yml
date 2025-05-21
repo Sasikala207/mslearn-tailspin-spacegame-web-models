@@ -35,15 +35,13 @@ steps:
     minorVersion: '0'
     patchVersion: '0'
 
-- script: |
-    apt-get update
-    apt-get install -y mono-complete
-  displayName: 'Install Mono'
- 
-- task: NuGetCommand@2
-  displayName: 'Publish NuGet package'
+- task: DotNetCoreCLI@2
+  displayName: 'Push'
   inputs:
-    command: push
-    feedPublish: '$(System.TeamProject)/Tailspin.SpaceGame.Web.Models'
+    command: 'push'
+    packagesToPush:'$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
+    nuGetFeedType: 'internal'
+    feedsToUse: 'select'
+    vstsFeed: 'your feed'
+    publishVstsFeed: 'your feed'
     allowPackageConflicts: true
-  condition: succeeded()
