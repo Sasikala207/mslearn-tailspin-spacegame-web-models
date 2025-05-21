@@ -1,5 +1,5 @@
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: 'ubuntu-20.04'
 
 variables:
   buildConfiguration: 'Release'
@@ -34,14 +34,11 @@ steps:
     majorVersion: '1'
     minorVersion: '0'
     patchVersion: '0'
-
-- task: DotNetCoreCLI@2
-  displayName: 'Push'
+ 
+- task: NuGetCommand@2
+  displayName: 'Publish NuGet package'
   inputs:
-    command: 'push'
-    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
-    nuGetFeedType: 'internal'
-    feedsToUse: 'select'
-    vstsFeed: 'your feed'
-    publishVstsFeed: 'your feed'
+    command: push
+    feedPublish: '$(System.TeamProject)/Tailspin.SpaceGame.Web.Models'
     allowPackageConflicts: true
+  condition: succeeded()
