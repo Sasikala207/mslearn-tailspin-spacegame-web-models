@@ -36,8 +36,8 @@ steps:
     patchVersion: '0'
 
 - script: |
-        apt-get update
-        apt-get install -y mono-complete
+    apt-get update
+    apt-get install -y mono-complete
   displayName: 'Install Mono'
  
 - task: NuGetCommand@2
