@@ -39,7 +39,7 @@ steps:
   displayName: 'Push'
   inputs:
     command: 'push'
-    packagesToPush:'$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
     nuGetFeedType: 'internal'
     feedsToUse: 'select'
     vstsFeed: 'your feed'
